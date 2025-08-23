@@ -1,0 +1,12 @@
+{% extends 'logbook/base.html' %}
+{% block title %}Welcome{% endblock %}
+
+{% block content %}
+<div class="jumbotron text-center mt-5">
+    <h1 class="display-4">Welcome to the SIWES E-Logbook System</h1>
+    <p class="lead">A modern solution for monitoring and documenting student activities during SIWES.</p>
+    <hr class="my-4">
+    <p>Please log in to continue.</p>
+    <a class="btn btn-primary btn-lg" href="{% url 'login' %}" role="button">Login</a>
+</div>
+{% endblock %}

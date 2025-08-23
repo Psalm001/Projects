@@ -1,0 +1,26 @@
+{% extends 'logbook/base.html' %}
+
+{% block title %}Supervisor Dashboard{% endblock %}
+{% block content %}
+<div class="mt-4">
+    <h1 class="mb-4">Student Log Entries</h1>
+
+    <div class="row">
+        {% for log in logs %}
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ log.student.username }} <small class="text-muted">({{ log.date }})</small></h5>
+                    <p class="card-text">{{ log.activity_description|truncatechars:150 }}</p>
+                    <a href="{% url 'log_detail' log.id %}" class="btn btn-info">View Log</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <p class="alert alert-info">No log entries to display.</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

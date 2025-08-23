@@ -1,0 +1,44 @@
+{% extends 'logbook/base.html' %}
+
+{% block title %}Log Entry Details{% endblock %}
+{% block content %}
+<div class="mt-4">
+    <div class="card mb-4">
+        <div class="card-header">
+            <h3>Log Entry for {{ log.student.username }} on {{ log.date }}</h3>
+        </div>
+        <div class="card-body">
+            <p>{{ log.activity_description }}</p>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h5>Comments</h5>
+        </div>
+        <div class="card-body">
+            {% for comment in comments %}
+            <div class="media mb-3">
+                <div class="media-body">
+                    <h6 class="mt-0">{{ comment.author.username }} <small class="text-muted">({{ comment.created_at }})</small></h6>
+                    {{ comment.comment_text }}
+                </div>
+            </div>
+            {% empty %}
+            <p class="alert alert-info">No comments on this entry yet.</p>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <div class="card mt-4">
+        <div class="card-body">
+            <h5>Add a Comment</h5>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-success">Submit Comment</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
